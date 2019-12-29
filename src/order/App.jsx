@@ -9,6 +9,7 @@ import Account from "./Account";
 import Ticket from "./Ticket";
 import Passengers from "./Passengers";
 import Choose from "./Choose";
+import Menu from "./Menu";
 import "./App.css";
 
 import {
@@ -22,7 +23,11 @@ import {
   createAdult,
   createChild,
   removePassenger,
-  updatePassenger
+  updatePassenger,
+  hideMenu,
+  showGenderMenu,
+  showFollowAdultMenu,
+  showTicketTypeMenu
 } from "./actions";
 
 const App = ({
@@ -78,6 +83,29 @@ const App = ({
         createAdult,
         createChild,
         removePassenger,
+        updatePassenger,
+        showGenderMenu,
+        showFollowAdultMenu,
+        showTicketTypeMenu
+      },
+      dispatch
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const menuCbs = useMemo(() => {
+    return bindActionCreators(
+      {
+        hideMenu
+      },
+      dispatch
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const chooseCbs = useMemo(() => {
+    return bindActionCreators(
+      {
         updatePassenger
       },
       dispatch
@@ -110,6 +138,11 @@ const App = ({
       </div>
       <Ticket price={price} type={seatType} />
       <Passengers passengers={passengers} {...passengersCbs} />
+      {passengers.length > 0 && (
+        <Choose passengers={passengers} {...chooseCbs} />
+      )}
+      <Account length={passengers.length} price={price} />
+      <Menu show={isMenuVisible} {...menu} {...menuCbs} />
     </div>
   );
 };

@@ -127,7 +127,7 @@ export const createAdult = () => {
     for (let passenger of passengers) {
       const keys = Object.keys(passenger);
       for (let key of keys) {
-        if (!passenger[key]) {
+        if (!passenger[key].toString()) {
           return;
         }
       }
@@ -154,7 +154,7 @@ export const createChild = () => {
     for (let passenger of passengers) {
       const keys = Object.keys(passenger);
       for (let key of keys) {
-        if (!passenger[key]) {
+        if (!passenger[key].toString()) {
           return;
         }
       }
@@ -162,8 +162,7 @@ export const createChild = () => {
         adultFound = passenger.id;
       }
     }
-
-    if (!adultFound) {
+    if (!adultFound.toString()) {
       alert("Please add at least 1 adult!");
       return;
     }
@@ -195,16 +194,144 @@ export const removePassenger = id => {
   };
 };
 
-export const updatePassenger = (id, data) => {
+export const updatePassenger = (id, data, keysToBeRemoved = []) => {
   return (dispatch, getState) => {
     const { passengers } = getState();
     for (let i = 0; i < passengers.length; i++) {
       if (passengers[i].id === id) {
         const newPassengers = [...passengers];
         newPassengers[i] = Object.assign({}, passengers[i], data);
+        for (let key of keysToBeRemoved) {
+          delete newPassengers[i][key];
+        }
         dispatch(setPassengers(newPassengers));
         break;
       }
     }
   };
+};
+
+export const showMenu = menu => {
+  return (dispatch, getState) => {
+    dispatch(setMenu(menu));
+    dispatch(setIsMenuVisible(true));
+  };
+};
+
+export const showGenderMenu = id => {
+  return (dispatch, getState) => {
+    const { passengers } = getState();
+    const passenger = passengers.find(passenger => passenger.id === id);
+    if (!passenger) {
+      return;
+    }
+    dispatch(
+      showMenu({
+        onPress(gender) {
+          dispatch(updatePassenger(id, { gender }));
+          dispatch(hideMenu());
+        },
+        options: [
+          {
+            title: "Male",
+            value: "male",
+            active: "male" === passenger.gender
+          },
+          {
+            title: "Female",
+            value: "female",
+            active: "female" === passenger.gender
+          }
+        ]
+      })
+    );
+  };
+};
+
+export const showFollowAdultMenu = id => {
+  return (dispatch, getState) => {
+    const { passengers } = getState();
+    const passenger = passengers.find(passenger => passenger.id === id);
+    if (!passenger) {
+      return;
+    }
+    dispatch(
+      showMenu({
+        onPress(followAdult) {
+          dispatch(updatePassenger(id, { followAdult }));
+          dispatch(hideMenu());
+        },
+        options: passengers
+          .filter(passenger => passenger.ticketType === "adult")
+          .map(adult => ({
+            title: adult.name,
+            value: adult.id,
+            active: adult.id === passenger.followAdult
+          }))
+      })
+    );
+  };
+};
+
+export const showTicketTypeMenu = id => {
+  return (dispatch, getState) => {
+    const { passengers } = getState();
+    const passenger = passengers.find(passenger => passenger.id === id);
+    if (!passenger) {
+      return;
+    }
+    dispatch(
+      showMenu({
+        onPress(ticketType) {
+          if ("adult" === ticketType) {
+            dispatch(
+              updatePassenger(id, { ticketType, licenceNo: "" }, [
+                "gender",
+                "followAdult",
+                "birthday"
+              ])
+            );
+          } else {
+            const adult = passengers.find(
+              passenger =>
+                passenger.id !== id && passenger.ticketType === "adult"
+            );
+            if (adult) {
+              dispatch(
+                updatePassenger(
+                  id,
+                  {
+                    ticketType,
+                    gender: "",
+                    followAdult: adult.id,
+                    birthday: ""
+                  },
+                  ["licenceNo"]
+                )
+              );
+            } else {
+              alert("No other adult passengers!");
+            }
+          }
+          dispatch(hideMenu());
+        },
+        options: [
+          {
+            title: "Adult",
+            value: "adult",
+            active: "adult" === passenger.ticketType
+          },
+          {
+            title: "Child",
+            value: "child",
+            active: "child" === passenger.ticketType
+          }
+        ]
+      })
+    );
+  };
+};
+
+export const hideMenu = () => {
+  return setIsMenuVisible(false);
 };
