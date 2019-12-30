@@ -25,39 +25,39 @@ const ListItem = memo(
     }, [aStation, dStation, trainNumber, date]);
 
     return (
-      <li className="list-item">
-        <a href={url}>
-          <span className="item-time">
-            <em>{dTime}</em>
-            <br />
-            <em className="em-light">
-              {aTime}
-              <i className="time-after">{dayAfter}</i>
-            </em>
-          </span>
-          <span className="item-stations">
-            <em className="em-light">
-              <i className="train-station train-start">D</i>
-              {dStation}
-            </em>
-            <br />
-            <em>
-              <i className="train-station train-end">A</i>
-              {aStation}
-            </em>
-          </span>
-          <span className="item-train">
-            <em className="em-light">{trainNumber}</em>
-            <br />
-            <em>{time}</em>
-          </span>
-          <span className="item-ticket">
-            <em>{priceMsg}</em>
-            <br />
-            <em className="em-light-orange">Available</em>
-          </span>
-        </a>
-      </li>
+        <li className="list-item">
+            <a href={url}>
+                <span className="item-time">
+                    <em>{dTime}</em>
+                    <br />
+                    <em className="em-light">
+                        {aTime}
+                        <i className="time-after">{dayAfter}</i>
+                    </em>
+                </span>
+                <span className="item-stations">
+                    <em className="em-light">
+                        <i className="train-station train-start">D</i>
+                        {dStation}
+                    </em>
+                    <br />
+                    <em>
+                        <i className="train-station train-end">A</i>
+                        {aStation}
+                    </em>
+                </span>
+                <span className="item-train">
+                    <em className="em-light">{trainNumber}</em>
+                    <br />
+                    <em>{time}</em>
+                </span>
+                <span className="item-ticket">
+                    <em>{priceMsg}</em>
+                    <br />
+                    <em className="em-light-orange">Available</em>
+                </span>
+            </a>
+        </li>
     );
   }
 );
@@ -76,11 +76,11 @@ ListItem.propTypes = {
 
 const List = memo(({ list }) => {
   return (
-    <ul className="list">
-      {list.map(item => (
-        <ListItem {...item} key={item.trainNumber} />
+      <ul className="list">
+          {list.map(item => (
+              <ListItem {...item} key={item.trainNumber} />
       ))}
-    </ul>
+      </ul>
   );
 });
 

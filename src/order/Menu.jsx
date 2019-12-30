@@ -5,14 +5,14 @@ import "./Menu.css";
 
 const MenuItem = memo(({ onPress, title, value, active }) => {
   return (
-    <li
+      <li
       className={classnames({ active })}
       onClick={() => {
         onPress(value);
       }}
     >
-      {title}
-    </li>
+          {title}
+      </li>
   );
 });
 
@@ -25,22 +25,22 @@ MenuItem.propTypes = {
 
 const Menu = memo(({ show, options, onPress, hideMenu }) => {
   return (
-    <div>
-      {show && <div className="menu-mask" onClick={hideMenu}></div>}
-      <div className={classnames("menu", { show })}>
-        <div className="menu-title"></div>
-        <ul>
-          {options &&
+      <div>
+          {show && <div className="menu-mask" onClick={hideMenu}></div>}
+          <div className={classnames("menu", { show })}>
+              <div className="menu-title"></div>
+              <ul>
+                  {options &&
             options.map(option => (
-              <MenuItem
+                <MenuItem
                 key={option.value}
                 {...option}
                 onPress={onPress}
               ></MenuItem>
             ))}
-        </ul>
+              </ul>
+          </div>
       </div>
-    </div>
   );
 });
 

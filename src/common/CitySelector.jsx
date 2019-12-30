@@ -5,9 +5,9 @@ import "./CitySelector.css";
 
 const CityItem = memo(({ name, onSelect }) => {
   return (
-    <li className="city-li" onClick={() => onSelect(name)}>
-      {name}
-    </li>
+      <li className="city-li" onClick={() => onSelect(name)}>
+          {name}
+      </li>
   );
 });
 
@@ -18,14 +18,14 @@ CityItem.propTypes = {
 
 const CitySection = memo(({ title, cities = [], onSelect }) => {
   return (
-    <ul className="city-ul">
-      <li className="city-li" key="title" data-cate={title}>
-        {title}
-      </li>
-      {cities.map(city => (
-        <CityItem key={city.name} name={city.name} onSelect={onSelect} />
+      <ul className="city-ul">
+          <li className="city-li" key="title" data-cate={title}>
+              {title}
+          </li>
+          {cities.map(city => (
+              <CityItem key={city.name} name={city.name} onSelect={onSelect} />
       ))}
-    </ul>
+      </ul>
   );
 });
 
@@ -37,9 +37,9 @@ CitySection.propTypes = {
 
 const AlphaIndex = memo(({ alpha, onClick }) => {
   return (
-    <i className="city-index-item" onClick={() => onClick(alpha)}>
-      {alpha}
-    </i>
+      <i className="city-index-item" onClick={() => onClick(alpha)}>
+          {alpha}
+      </i>
   );
 });
 
@@ -54,23 +54,23 @@ const alphabet = Array.from(new Array(26), (el, index) =>
 
 const CityList = memo(({ sections, onSelect, toAlpha }) => {
   return (
-    <div className="city-list">
-      <div className="city-cate">
-        {sections.map(section => (
-          <CitySection
+      <div className="city-list">
+          <div className="city-cate">
+              {sections.map(section => (
+                  <CitySection
             key={section.title}
             title={section.title}
             cities={section.citys}
             onSelect={onSelect}
           />
         ))}
-      </div>
-      <div className="city-index">
-        {alphabet.map(alpha => (
-          <AlphaIndex key={alpha} alpha={alpha} onClick={toAlpha} />
+          </div>
+          <div className="city-index">
+              {alphabet.map(alpha => (
+                  <AlphaIndex key={alpha} alpha={alpha} onClick={toAlpha} />
         ))}
+          </div>
       </div>
-    </div>
   );
 });
 
@@ -82,9 +82,9 @@ CityList.propTypes = {
 
 const SuggestItem = memo(({ name, onClick }) => {
   return (
-    <li className="city-suggest-li" onClick={() => onClick(name)}>
-      {name}
-    </li>
+      <li className="city-suggest-li" onClick={() => onClick(name)}>
+          {name}
+      </li>
   );
 });
 
@@ -109,17 +109,17 @@ const Suggest = memo(({ searchKey, onSelect }) => {
   const fallBackResult = result.length ? result : [{ display: searchKey }];
 
   return (
-    <div className="city-suggest">
-      <ul className="city-suggest-ul">
-        {fallBackResult.map(item => (
-          <SuggestItem
+      <div className="city-suggest">
+          <ul className="city-suggest-ul">
+              {fallBackResult.map(item => (
+                  <SuggestItem
             key={item.display}
             name={item.display}
             onClick={onSelect}
           />
         ))}
-      </ul>
-    </div>
+          </ul>
+      </div>
   );
 });
 
@@ -158,7 +158,7 @@ const CitySelector = ({
     }
     if (cityData) {
       return (
-        <CityList
+          <CityList
           sections={cityData.cityList}
           onSelect={onSelect}
           toAlpha={toAlpha}
@@ -169,41 +169,41 @@ const CitySelector = ({
   };
 
   return (
-    <div className={classnames("city-selector", { hidden: !show })}>
-      <div className="city-search">
-        <div className="search-back" onClick={() => onBack()}>
-          <svg width="42" height="42">
-            <polyline
+      <div className={classnames("city-selector", { hidden: !show })}>
+          <div className="city-search">
+              <div className="search-back" onClick={() => onBack()}>
+                  <svg width="42" height="42">
+                      <polyline
               points="25,13 16,21 25,29"
               stroke="#fff"
               strokeWidth="2"
               fill="none"
             />
-          </svg>
-        </div>
-        <div className="search-input-wrapper">
-          <input
+                  </svg>
+              </div>
+              <div className="search-input-wrapper">
+                  <input
             type="text"
             value={searchKey}
             className="search-input"
             placeholder="City or station..."
             onChange={e => setSearchKey(e.target.value)}
           />
-        </div>
-        <i
+              </div>
+              <i
           className={classnames("search-clean", {
             hidden: key.length === 0
           })}
           onClick={() => setSearchKey("")}
         >
           &#xf063;
-        </i>
-      </div>
-      {Boolean(key) && (
-        <Suggest searchKey={key} onSelect={key => onSelect(key)} />
+              </i>
+          </div>
+          {Boolean(key) && (
+          <Suggest searchKey={key} onSelect={key => onSelect(key)} />
       )}
-      {outputCitySections()}
-    </div>
+          {outputCitySections()}
+      </div>
   );
 };
 

@@ -21,43 +21,43 @@ const Passenger = memo(
     const isAdult = ticketType === "adult";
 
     return (
-      <li className="passenger">
-        <i className="delete" onClick={() => onRemove(id)}>
+        <li className="passenger">
+            <i className="delete" onClick={() => onRemove(id)}>
           —
-        </i>
-        <ol className="items">
-          <li className="item">
-            <label className="label name">Name</label>
-            <input
+            </i>
+            <ol className="items">
+                <li className="item">
+                    <label className="label name">Name</label>
+                    <input
               type="text"
               className="input name"
               placeholder="Passenger Name"
               value={name}
               onChange={e => onUpdate(id, { name: e.target.value })}
             />
-            <label
+                    <label
               className="ticket-type"
               onClick={() => showTicketTypeMenu(id)}
             >
-              {isAdult ? "Adult" : "Child"}
-            </label>
-          </li>
-          {isAdult && (
-            <li className="item">
-              <label className="label licenceNo">ID No.</label>
-              <input
+                        {isAdult ? "Adult" : "Child"}
+                    </label>
+                </li>
+                {isAdult && (
+                <li className="item">
+                    <label className="label licenceNo">ID No.</label>
+                    <input
                 type="text"
                 className="input licenceNo"
                 placeholder="ID Number"
                 value={licenceNo}
                 onChange={e => onUpdate(id, { licenceNo: e.target.value })}
               />
-            </li>
+                </li>
           )}
-          {!isAdult && (
-            <li className="item arrow">
-              <label className="label gender">Gender</label>
-              <input
+                {!isAdult && (
+                <li className="item arrow">
+                    <label className="label gender">Gender</label>
+                    <input
                 type="text"
                 className="input gender"
                 onClick={() => showGenderMenu(id)}
@@ -71,24 +71,24 @@ const Passenger = memo(
                 }
                 readOnly
               />
-            </li>
+                </li>
           )}
-          {!isAdult && (
-            <li className="item">
-              <label className="label birthday">DOB</label>
-              <input
+                {!isAdult && (
+                <li className="item">
+                    <label className="label birthday">DOB</label>
+                    <input
                 type="text"
                 className="input birthday"
                 placeholder="ex: 19951010"
                 value={birthday}
                 onChange={e => onUpdate(id, { birthday: e.target.value })}
               />
-            </li>
+                </li>
           )}
-          {!isAdult && (
-            <li className="item arrow">
-              <label className="label followAdult">Peer Adult</label>
-              <input
+                {!isAdult && (
+                <li className="item arrow">
+                    <label className="label followAdult">Peer Adult</label>
+                    <input
                 type="text"
                 className="input followAdult"
                 onClick={() => showFollowAdultMenu(id)}
@@ -96,10 +96,10 @@ const Passenger = memo(
                 value={followAdultName}
                 readOnly
               />
-            </li>
+                </li>
           )}
-        </ol>
-      </li>
+            </ol>
+        </li>
     );
   }
 );
@@ -140,10 +140,10 @@ const Passengers = memo(
     }, [passengers]);
 
     return (
-      <div className="passengers">
-        <ul>
-          {passengers.map(passenger => (
-            <Passenger
+        <div className="passengers">
+            <ul>
+                {passengers.map(passenger => (
+                    <Passenger
               {...passenger}
               key={passenger.id}
               followAdultName={nameMap[passenger.followAdult]}
@@ -154,16 +154,16 @@ const Passengers = memo(
               showTicketTypeMenu={showTicketTypeMenu}
             />
           ))}
-        </ul>
-        <section className="add">
-          <div className="adult" onClick={createAdult}>
+            </ul>
+            <section className="add">
+                <div className="adult" onClick={createAdult}>
             Add Adult
-          </div>
-          <div className="child" onClick={createChild}>
+                </div>
+                <div className="child" onClick={createChild}>
             Add Child
-          </div>
-        </section>
-      </div>
+                </div>
+            </section>
+        </div>
     );
   }
 );

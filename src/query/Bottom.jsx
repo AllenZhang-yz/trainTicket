@@ -7,9 +7,9 @@ import { ORDER_DEPART } from "./constant";
 
 const Filter = memo(({ name, checked, value, toggle }) => {
   return (
-    <li className={classnames({ checked })} onClick={() => toggle(value)}>
-      {name}
-    </li>
+      <li className={classnames({ checked })} onClick={() => toggle(value)}>
+          {name}
+      </li>
   );
 });
 
@@ -35,19 +35,19 @@ const Option = memo(({ title, options, checkedMap, update }) => {
   );
 
   return (
-    <div className="option">
-      <h3>{title}</h3>
-      <ul>
-        {options.map(option => (
-          <Filter
+      <div className="option">
+          <h3>{title}</h3>
+          <ul>
+              {options.map(option => (
+                  <Filter
             key={option.value}
             {...option}
             checked={option.value in checkedMap}
             toggle={toggle}
           />
         ))}
-      </ul>
-    </div>
+          </ul>
+      </div>
   );
 });
 
@@ -202,42 +202,42 @@ const BottomModal = memo(
     ]);
 
     return (
-      <div className="bottom-modal">
-        <div className="bottom-dialog">
-          <div className="bottom-dialog-content">
-            <div className="title">
-              <span
+        <div className="bottom-modal">
+            <div className="bottom-dialog">
+                <div className="bottom-dialog-content">
+                    <div className="title">
+                        <span
                 className={classnames("reset", { disabled: isResetDisabled })}
                 onClick={reset}
               >
                 Reset
-              </span>
-              <span className="ok" onClick={sure}>
+                        </span>
+                        <span className="ok" onClick={sure}>
                 OK
-              </span>
-            </div>
-            <div className="options">
-              {optionGroup.map(group => (
-                <Option key={group.title} {...group} />
+                        </span>
+                    </div>
+                    <div className="options">
+                        {optionGroup.map(group => (
+                            <Option key={group.title} {...group} />
               ))}
-              <Slider
+                        <Slider
                 title="Depart Time"
                 currentStartHours={localDepartTimeStart}
                 currentEndHours={localDepartTimeEnd}
                 onStartChanged={setLocalDepartTimeStart}
                 onEndChanged={setLocalDepartTimeEnd}
               />
-              <Slider
+                        <Slider
                 title="Arrive Time"
                 currentStartHours={localArriveTimeStart}
                 currentEndHours={localArriveTimeEnd}
                 onStartChanged={setLocalArriveTimeStart}
                 onEndChanged={setLocalArriveTimeEnd}
               />
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     );
   }
 );
@@ -319,38 +319,38 @@ const Bottom = ({
   ]);
 
   return (
-    <div className="bottom">
-      <div className="bottom-filters">
-        <span className="item" onClick={toggleOrderType}>
-          <i className="icon">&#xf065;</i>
-          {orderType === ORDER_DEPART ? "Departure Time" : "Time Span"}
-        </span>
-        <span
+      <div className="bottom">
+          <div className="bottom-filters">
+              <span className="item" onClick={toggleOrderType}>
+                  <i className="icon">&#xf065;</i>
+                  {orderType === ORDER_DEPART ? "Departure Time" : "Time Span"}
+              </span>
+              <span
           className={classnames("item", { "item-on": highSpeed })}
           onClick={toggleHighSpeed}
         >
-          <i className="icon">{highSpeed ? "\uf43f" : "\uf43e"}</i>
+                  <i className="icon">{highSpeed ? "\uf43f" : "\uf43e"}</i>
           Only HighSpeed
-        </span>
-        <span
+              </span>
+              <span
           className={classnames("item", { "item-on": onlyTickets })}
           onClick={toggleOnlyTickets}
         >
-          <i className="icon">{onlyTickets ? "\uf43d" : "\uf43c"}</i>
+                  <i className="icon">{onlyTickets ? "\uf43d" : "\uf43c"}</i>
           Tickets Available
-        </span>
-        <span
+              </span>
+              <span
           className={classnames("item", {
             "item-on": isFiltersVisible || !noChecked
           })}
           onClick={toggleIsFiltersVisible}
         >
-          <i className="icon">{noChecked ? "\uf0f7" : "\uf446"}</i>
+                  <i className="icon">{noChecked ? "\uf0f7" : "\uf446"}</i>
           Filter
-        </span>
-      </div>
-      {isFiltersVisible && (
-        <BottomModal
+              </span>
+          </div>
+          {isFiltersVisible && (
+          <BottomModal
           ticketTypes={ticketTypes}
           trainTypes={trainTypes}
           departStations={departStations}
@@ -374,7 +374,7 @@ const Bottom = ({
           toggleIsFiltersVisible={toggleIsFiltersVisible}
         />
       )}
-    </div>
+      </div>
   );
 };
 

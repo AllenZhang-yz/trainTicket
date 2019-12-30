@@ -6,9 +6,9 @@ import "./Choose.css";
 const Choose = memo(({ passengers, updatePassenger }) => {
   const createSeat = seatType => {
     return (
-      <div>
-        {passengers.map(passenger => (
-          <p
+        <div>
+            {passengers.map(passenger => (
+                <p
             key={passenger.id}
             className={classnames("seat", {
               active: passenger.seat === seatType
@@ -17,28 +17,28 @@ const Choose = memo(({ passengers, updatePassenger }) => {
             onClick={() => updatePassenger(passenger.id, { seat: seatType })}
           >
             &#xe02d;
-          </p>
+                </p>
         ))}
-      </div>
+        </div>
     );
   };
 
   return (
-    <div className="choose">
-      <p className="tip">Choose Seat Online</p>
-      <div className="container">
-        <div className="seats">
-          <div>Window</div>
-          {createSeat("A")}
-          {createSeat("B")}
-          {createSeat("C")}
-          <div>Isle</div>
-          {createSeat("D")}
-          {createSeat("F")}
-          <div>Window</div>
-        </div>
+      <div className="choose">
+          <p className="tip">Choose Seat Online</p>
+          <div className="container">
+              <div className="seats">
+                  <div>Window</div>
+                  {createSeat("A")}
+                  {createSeat("B")}
+                  {createSeat("C")}
+                  <div>Isle</div>
+                  {createSeat("D")}
+                  {createSeat("F")}
+                  <div>Window</div>
+              </div>
+          </div>
       </div>
-    </div>
   );
 });
 

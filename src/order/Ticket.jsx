@@ -4,13 +4,13 @@ import "./Ticket.css";
 
 const Ticket = memo(({ price, type }) => {
   return (
-    <div className="ticket">
-      <p>
-        <span className="ticket-type">{type}</span>
-        <span className="ticket-price">{price}</span>
-      </p>
-      <div className="label">Seat Type</div>
-    </div>
+      <div className="ticket">
+          <p>
+              <span className="ticket-type">{type}</span>
+              <span className="ticket-price">{price}</span>
+          </p>
+          <div className="label">Seat Type</div>
+      </div>
   );
 });
 

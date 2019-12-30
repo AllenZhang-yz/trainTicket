@@ -10,21 +10,21 @@ const Nav = memo(({ date, prev, next, isPrevDisabled, isNextDisabled }) => {
     return d.format("DD-MM") + " " + d.format("ddd");
   }, [date]);
   return (
-    <div className="nav">
-      <span
+      <div className="nav">
+          <span
         onClick={prev}
         className={classnames("nav-prev", { "nav-disabled": isPrevDisabled })}
       >
         Prev
-      </span>
-      <span className="nav-current">{currentString}</span>
-      <span
+          </span>
+          <span className="nav-current">{currentString}</span>
+          <span
         onClick={next}
         className={classnames("nav-next", { "nav-disabled": isNextDisabled })}
       >
         Next
-      </span>
-    </div>
+          </span>
+      </div>
   );
 });
 

@@ -19,9 +19,9 @@ const Day = ({ day, onSelect }) => {
   }
   const dateString = now === day ? "Today" : new Date(day).getDate();
   return (
-    <td className={classnames(classes)} onClick={() => onSelect(day)}>
-      {dateString}
-    </td>
+      <td className={classnames(classes)} onClick={() => onSelect(day)}>
+          {dateString}
+      </td>
   );
 };
 
@@ -32,11 +32,11 @@ Day.propTypes = {
 
 const Week = ({ days, onSelect }) => {
   return (
-    <tr className={"date-table-days"}>
-      {days.map((day, index) => (
-        <Day key={index} day={day} onSelect={onSelect} />
+      <tr className={"date-table-days"}>
+          {days.map((day, index) => (
+              <Day key={index} day={day} onSelect={onSelect} />
       ))}
-    </tr>
+      </tr>
   );
 };
 
@@ -67,31 +67,31 @@ const Month = ({ startingTimeInMonth, onSelect }) => {
     weeks.push(week);
   }
   return (
-    <table className="date-table">
-      <thead>
-        <tr>
-          <td colSpan="7">
-            <h5>
-              {startDay.getMonth() + 1}/{startDay.getFullYear()}
-            </h5>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="data-table-weeks">
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th className="weekend">Sat</th>
-          <th className="weekend">Sun</th>
-        </tr>
-        {weeks.map((week, index) => (
-          <Week key={index} days={week} onSelect={onSelect} />
+      <table className="date-table">
+          <thead>
+              <tr>
+                  <td colSpan="7">
+                      <h5>
+                          {startDay.getMonth() + 1}/{startDay.getFullYear()}
+                      </h5>
+                  </td>
+              </tr>
+          </thead>
+          <tbody>
+              <tr className="data-table-weeks">
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th className="weekend">Sat</th>
+                  <th className="weekend">Sun</th>
+              </tr>
+              {weeks.map((week, index) => (
+                  <Week key={index} days={week} onSelect={onSelect} />
         ))}
-      </tbody>
-    </table>
+          </tbody>
+      </table>
   );
 };
 
@@ -117,14 +117,14 @@ const DateSelector = ({ show, onSelect, onBack }) => {
   monthSequence.push(now.getTime());
 
   return (
-    <div className={classnames("date-selector", { hidden: !show })}>
-      <Header title="Select Date" onBack={onBack} />
-      <div className="date-selector-tables">
-        {monthSequence.map(month => (
-          <Month key={month} startingTimeInMonth={month} onSelect={onSelect} />
+      <div className={classnames("date-selector", { hidden: !show })}>
+          <Header title="Select Date" onBack={onBack} />
+          <div className="date-selector-tables">
+              {monthSequence.map(month => (
+                  <Month key={month} startingTimeInMonth={month} onSelect={onSelect} />
         ))}
+          </div>
       </div>
-    </div>
   );
 };
 

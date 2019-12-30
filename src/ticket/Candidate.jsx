@@ -20,15 +20,15 @@ const Channel = memo(({ name, desc, type }) => {
       .toString();
   }, [trainNumber, departStation, arriveStation, departDate, type]);
   return (
-    <div className="channel">
-      <div className="middle">
-        <div className="name">{name}</div>
-        <div className="desc">{desc}</div>
+      <div className="channel">
+          <div className="middle">
+              <div className="name">{name}</div>
+              <div className="desc">{desc}</div>
+          </div>
+          <a href={src} className="buy-wrapper">
+              <div className="buy">Buy</div>
+          </a>
       </div>
-      <a href={src} className="buy-wrapper">
-        <div className="buy">Buy</div>
-      </a>
-    </div>
   );
 });
 
@@ -41,25 +41,25 @@ Channel.propTypes = {
 const Seat = memo(
   ({ type, priceMsg, ticketsLeft, channels, expanded, onToggle, index }) => {
     return (
-      <li>
-        <div className="bar" onClick={() => onToggle(index)}>
-          <span className="seat">{type}</span>
-          <span className="price">
-            <i>￥</i>
-            {priceMsg}
-          </span>
-          <span className="btn">{expanded ? "Book" : "Retract"}</span>
-          <span className="num">{ticketsLeft}</span>
-        </div>
-        <div
+        <li>
+            <div className="bar" onClick={() => onToggle(index)}>
+                <span className="seat">{type}</span>
+                <span className="price">
+                    <i>￥</i>
+                    {priceMsg}
+                </span>
+                <span className="btn">{expanded ? "Book" : "Retract"}</span>
+                <span className="num">{ticketsLeft}</span>
+            </div>
+            <div
           className="channels"
           style={{ height: expanded ? channels.length * 55 + "px" : 0 }}
         >
-          {channels.map(channel => (
-            <Channel key={channel.name} {...channel} type={type} />
+                {channels.map(channel => (
+                    <Channel key={channel.name} {...channel} type={type} />
           ))}
-        </div>
-      </li>
+            </div>
+        </li>
     );
   }
 );
@@ -83,10 +83,10 @@ const Candidate = memo(({ tickets }) => {
     [expandedIndex]
   );
   return (
-    <div className=" candidate">
-      <ul>
-        {tickets.map((ticket, index) => (
-          <Seat
+      <div className=" candidate">
+          <ul>
+              {tickets.map((ticket, index) => (
+                  <Seat
             {...ticket}
             index={index}
             key={ticket.type}
@@ -94,8 +94,8 @@ const Candidate = memo(({ tickets }) => {
             onToggle={onToggle}
           />
         ))}
-      </ul>
-    </div>
+          </ul>
+      </div>
   );
 });
 

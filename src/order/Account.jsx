@@ -6,30 +6,30 @@ import "./Account.css";
 const Account = memo(({ price = 0, length }) => {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="account">
-      <div
+      <div className="account">
+          <div
         className={classnames("price", { expanded })}
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="money">{length * price}</div>
-        <div className="amount">Total Amount</div>
-      </div>
-      <div className="button">Submit</div>
-      <div
+              <div className="money">{length * price}</div>
+              <div className="amount">Total Amount</div>
+          </div>
+          <div className="button">Submit</div>
+          <div
         className={classnames("layer", { hidden: !expanded })}
         onClick={() => setExpanded(false)}
       ></div>
-      <div className={classnames("detail", { hidden: !expanded })}>
-        <div className="title">Details</div>
-        <ul>
-          <li>
-            <span>Train Tickets</span>
-            <span>￥{price}</span>
-            <span>&#xD7;{length}</span>
-          </li>
-        </ul>
+          <div className={classnames("detail", { hidden: !expanded })}>
+              <div className="title">Details</div>
+              <ul>
+                  <li>
+                      <span>Train Tickets</span>
+                      <span>￥{price}</span>
+                      <span>&#xD7;{length}</span>
+                  </li>
+              </ul>
+          </div>
       </div>
-    </div>
   );
 });
 

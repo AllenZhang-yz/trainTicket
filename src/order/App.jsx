@@ -118,12 +118,12 @@ const App = ({
   }
 
   return (
-    <div className="app">
-      <div className="header-wrapper">
-        <Header title="Fill in the order" onBack={onBack} />
-      </div>
-      <div className="detail-wrapper">
-        <Detail
+      <div className="app">
+          <div className="header-wrapper">
+              <Header title="Fill in the order" onBack={onBack} />
+          </div>
+          <div className="detail-wrapper">
+              <Detail
           departDate={departDate}
           arriveDate={arriveDate}
           departTimeStr={departTimeStr}
@@ -133,17 +133,17 @@ const App = ({
           arriveStation={arriveStation}
           durationStr={durationStr}
         >
-          <span style={{ display: "block" }} className="train-icon"></span>
-        </Detail>
-      </div>
-      <Ticket price={price} type={seatType} />
-      <Passengers passengers={passengers} {...passengersCbs} />
-      {passengers.length > 0 && (
-        <Choose passengers={passengers} {...chooseCbs} />
+                  <span style={{ display: "block" }} className="train-icon"></span>
+              </Detail>
+          </div>
+          <Ticket price={price} type={seatType} />
+          <Passengers passengers={passengers} {...passengersCbs} />
+          {passengers.length > 0 && (
+          <Choose passengers={passengers} {...chooseCbs} />
       )}
-      <Account length={passengers.length} price={price} />
-      <Menu show={isMenuVisible} {...menu} {...menuCbs} />
-    </div>
+          <Account length={passengers.length} price={price} />
+          <Menu show={isMenuVisible} {...menu} {...menuCbs} />
+      </div>
   );
 };
 

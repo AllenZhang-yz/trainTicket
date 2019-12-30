@@ -3,11 +3,11 @@ import "./Submit.css";
 
 const Submit = memo(() => {
   return (
-    <div className="submit">
-      <button type="submit" className="submit-button">
+      <div className="submit">
+          <button type="submit" className="submit-button">
         Search
-      </button>
-    </div>
+          </button>
+      </div>
   );
 });
 

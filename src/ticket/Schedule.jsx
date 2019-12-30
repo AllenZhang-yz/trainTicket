@@ -21,37 +21,37 @@ const ScheduleRow = memo(
     afterArriveStation
   }) => {
     return (
-      <li>
-        <div
+        <li>
+            <div
           className={classnames("icon", {
             "icon-red": isDepartStation || isArriveStation
           })}
         >
-          {isDepartStation ? "D" : isArriveStation ? "A" : leftPad(index, 2, 0)}
-        </div>
-        <div
+                {isDepartStation ? "D" : isArriveStation ? "A" : leftPad(index, 2, 0)}
+            </div>
+            <div
           className={classnames("row", {
             grey: beforeDepartStation || afterArriveStation
           })}
         >
-          <span
+                <span
             className={classnames("station", {
               red: isArriveStation || isDepartStation
             })}
           >
-            {station}
-          </span>
-          <span className={classnames("arrtime", { red: isArriveStation })}>
-            {isStartStation ? "Start Sta" : arriveTime}
-          </span>
-          <span className={classnames("deptime", { red: isDepartStation })}>
-            {isEndStation ? "Term Sta" : departTime}
-          </span>
-          <span className="stoptime">
-            {isStartStation || isEndStation ? "-" : stay + "min"}
-          </span>
-        </div>
-      </li>
+                    {station}
+                </span>
+                <span className={classnames("arrtime", { red: isArriveStation })}>
+                    {isStartStation ? "Start Sta" : arriveTime}
+                </span>
+                <span className={classnames("deptime", { red: isDepartStation })}>
+                    {isEndStation ? "Term Sta" : departTime}
+                </span>
+                <span className="stoptime">
+                    {isStartStation || isEndStation ? "-" : stay + "min"}
+                </span>
+            </div>
+        </li>
     );
   }
 );
@@ -122,26 +122,26 @@ const Schedule = memo(({ date, trainNumber, departStation, arriveStation }) => {
       });
   }, [date, trainNumber, departStation, arriveStation]);
   return (
-    <div className="schedule">
-      <div className="dialog">
-        <h1>Train Time Table</h1>
-        <div className="head">
-          <span className="station">Station</span>
-          <span className="arrtime">Arr</span>
-          <span className="deptime">Dept</span>
-          <span className="stoptime">Stop</span>
-        </div>
-        <ul>
-          {scheduleList.map((schedule, index) => (
-            <ScheduleRow
+      <div className="schedule">
+          <div className="dialog">
+              <h1>Train Time Table</h1>
+              <div className="head">
+                  <span className="station">Station</span>
+                  <span className="arrtime">Arr</span>
+                  <span className="deptime">Dept</span>
+                  <span className="stoptime">Stop</span>
+              </div>
+              <ul>
+                  {scheduleList.map((schedule, index) => (
+                      <ScheduleRow
               key={schedule.station}
               index={index + 1}
               {...schedule}
             />
           ))}
-        </ul>
+              </ul>
+          </div>
       </div>
-    </div>
   );
 });
 

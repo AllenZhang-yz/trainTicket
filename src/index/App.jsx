@@ -115,28 +115,28 @@ const App = ({
   }, []);
 
   return (
-    <div>
-      <div className="header-wrapper">
-        <Header title="Train Tickets" onBack={onBack} />
-      </div>
-      <form action="./query.html" className="form">
-        <Journey from={from} to={to} {...callbacks} />
-        <DepartDate time={departDate} {...departDateCbs} />
-        <HighSpeed highSpeed={highSpeed} {...HighSpeedCbs} />
-        <Submit />
-      </form>
-      <CitySelector
+      <div>
+          <div className="header-wrapper">
+              <Header title="Train Tickets" onBack={onBack} />
+          </div>
+          <form action="./query.html" className="form">
+              <Journey from={from} to={to} {...callbacks} />
+              <DepartDate time={departDate} {...departDateCbs} />
+              <HighSpeed highSpeed={highSpeed} {...HighSpeedCbs} />
+              <Submit />
+          </form>
+          <CitySelector
         show={isCitySelectorVisible}
         cityData={cityData}
         isLoading={isLoadingCityData}
         {...CitySelectorCbs}
       />
-      <DateSelector
+          <DateSelector
         show={isDateSelectorVisible}
         {...dateSelectorCbs}
         onSelect={onSelectDate}
       />
-    </div>
+      </div>
   );
 };
 
